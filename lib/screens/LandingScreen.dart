@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:uidesign2/screens/product_item.dart';
 import 'package:uidesign2/utils/constants.dart';
 
 import '../utils/data.dart';
@@ -21,8 +22,8 @@ class _LandingScreenState extends State<LandingScreen> {
           return Container(
             child: Column(
               children: [
-                Expanded(
-                  flex: 4,
+                Container(
+                  height: constraints.maxHeight * 0.40,
                   child: Stack(
                     fit: StackFit.expand,
                     children: [
@@ -94,10 +95,10 @@ class _LandingScreenState extends State<LandingScreen> {
                     ],
                   ),
                 ),
+                 
                 Container(
                         width: constraints.maxWidth,
                         color: Colors.grey.shade200,
-                        height: 400,
                         child: Padding(
                           padding: const EdgeInsets.only(
                             left: 10.0,
@@ -118,6 +119,19 @@ class _LandingScreenState extends State<LandingScreen> {
                                       Text("View All >", style: textTheme.subtitle2?.apply(color: COLOR_ORANGE),),
                                       addHorizontalSpace(10)
                                     ],
+                                  ),
+                                  addVerticalSpace(10),
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    physics: BouncingScrollPhysics(),
+                                    child: Row(
+                                      children: PRODUCT_DATA.map((data) => InkWell(
+                                        onTap: (){
+
+                                        },
+                                        child: ProductItem(productData: data, width: constraints.maxWidth * 0.50),
+                                      )).toList(),
+                                    ),
                                   )
                                 ],
                               ),
